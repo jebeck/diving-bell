@@ -14,6 +14,7 @@ class Landing extends PureComponent {
 
     this.state = { modalOpen: false };
   }
+
   handleOpen = e => {
     this.setState({ modalOpen: true });
   };
@@ -21,6 +22,7 @@ class Landing extends PureComponent {
   handleClose = e => {
     this.setState({ modalOpen: false });
   };
+
   render() {
     return (
       <Container>
@@ -109,7 +111,7 @@ class Landing extends PureComponent {
               </Modal.Actions>
             </Modal>
             <Button href="/intro" primary>
-              Next
+              Try it
             </Button>
           </Container>
         </Container>
