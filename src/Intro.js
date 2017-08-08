@@ -20,12 +20,16 @@ class Intro extends PureComponent {
     };
   }
 
+  handleClose = e => {
+    this.setState({ modalOpen: false });
+  };
+
   handleOpen = e => {
     this.setState({ modalOpen: true });
   };
 
-  handleClose = e => {
-    this.setState({ modalOpen: false });
+  handleProceed = e => {
+    this.props.history.push('/train');
   };
 
   render() {
@@ -47,7 +51,8 @@ class Intro extends PureComponent {
           <Segment size="large">
             <p>
               In order to try out this prototype, you <strong>must</strong>{' '}
-              allow webcam access in the browser pop-up requesting this!
+              allow webcam access in the browser pop-up requesting this on the
+              next page!
             </p>
           </Segment>
           <Container
@@ -68,40 +73,42 @@ class Intro extends PureComponent {
               <Modal.Content>
                 <p>
                   To replace the "partner" in traditional partner-assisted
-                  scanning, this prototype application replaces the partner's
-                  reading through the frequency-ordered list of letters of the
-                  alphabet with an application interface that animates through
-                  the frequency-ordered letters on a timer. To replace the
-                  partner's awareness of the user's letter selection via
-                  blinking, this prototype employs gaze detection in a target
-                  area of the screen: a held gaze in the target area meeting or
-                  exceeding a duration threshold counts as selection.
+                  scanning, this prototype replaces the partner's reading
+                  through the frequency-ordered list of letters of the alphabet
+                  with an application interface that animates through the
+                  frequency-ordered letters on a timer. To replace the partner's
+                  awareness of the user's letter selection via blinking, this
+                  prototype employs gaze detection in a target area of the
+                  screen: a held gaze in the target area meeting or exceeding a
+                  duration threshold counts as selection of the current letter.
                 </p>
                 <p>
                   This prototype employs the{' '}
                   <a
                     href="https://webgazer.cs.brown.edu/"
                     rel="noopener noreferrer"
+                    style={{ color: '#b5cfe8' }}
                     target="_blank"
                   >
                     WebGazer.js
                   </a>{' '}
-                  library for gaze detection. WebGazer tracks the user's eye
-                  movements using the image provided by the user's webcam in
-                  combination with algorithmic processing of that image. Gaze
-                  target rather than blink action is used because WebGazer has
-                  not yet fully integrated blink detection into the library's
-                  functionality.
+                  library for eye-tracking on the web. WebGazer tracks a user's
+                  eye movements using the video stream provided by the user's
+                  webcam in combination with algorithmic processing of that
+                  image. Gaze target rather than blink action is used because
+                  WebGazer has not yet fully integrated blink detection into the
+                  library's functionality.
                 </p>
                 <p>
-                  Because WebGazer relies on webcam images, allowing webcam
-                  permissions is necessary to test this prototype:{' '}
+                  Because WebGazer relies on a webcam video stream, allowing
+                  webcam permissions is necessary to try out this prototype:{' '}
                   <strong>
                     you <em>must</em> click 'Allow' on the next screen when the
                     browser alert asking for webcam access pops up
                   </strong>. Note that all image processing is done in the local
                   web browser; there is no connection to a server and no
-                  transmission or storage of webcam images.
+                  transmission or storage of the webcam video stream or
+                  component static images.
                 </p>
               </Modal.Content>
               <Modal.Actions>
@@ -110,7 +117,7 @@ class Intro extends PureComponent {
                 </Button>
               </Modal.Actions>
             </Modal>
-            <Button href="/train" primary>
+            <Button onClick={this.handleProceed} primary>
               Proceed
             </Button>
           </Container>

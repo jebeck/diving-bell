@@ -15,12 +15,16 @@ class Landing extends PureComponent {
     this.state = { modalOpen: false };
   }
 
+  handleClose = e => {
+    this.setState({ modalOpen: false });
+  };
+
   handleOpen = e => {
     this.setState({ modalOpen: true });
   };
 
-  handleClose = e => {
-    this.setState({ modalOpen: false });
+  handleTry = e => {
+    this.props.history.push('/intro');
   };
 
   render() {
@@ -110,7 +114,7 @@ class Landing extends PureComponent {
                 </Button>
               </Modal.Actions>
             </Modal>
-            <Button href="/intro" primary>
+            <Button onClick={this.handleTry} primary>
               Try it
             </Button>
           </Container>
