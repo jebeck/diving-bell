@@ -5,6 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import 'normalize.css';
 import 'semantic-ui-css/semantic.min.css';
+import './index.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

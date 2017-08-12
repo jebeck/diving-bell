@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 
-import './Trainer.css';
+import './Target.css';
 
 /* eslint-disable no-undef */
 
-class Trainer extends PureComponent {
+class Target extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -26,32 +26,35 @@ class Trainer extends PureComponent {
     }
 
     let timer;
-    webgazer
-      .setRegression('threadedRidge')
-      .setTracker('clmtrackr')
-      .setGazeListener((data, elapsed) => {
-        if (data != null) {
-          const selected = withinSelect(data.x, data.y);
-          if (selected) {
+    webgazer.setGazeListener((data, elapsed) => {
+      if (data != null) {
+        const selected = withinSelect(data.x, data.y);
+        if (selected) {
+          this.setState(() => ({ selected }));
+        }
+        if (timer) {
+          if (!selected) {
             this.setState(() => ({ selected }));
+            clearTimeout(timer);
+            timer = null;
           }
-          if (timer) {
-            if (!selected) {
-              this.setState(() => ({ selected }));
-              clearTimeout(timer);
-              timer = null;
-            }
-          } else {
-            if (selected) {
-              timer = setTimeout(() => {
-                this.props.recordClick();
-              }, 1000);
-            }
+        } else {
+          if (selected) {
+            timer = setTimeout(() => {
+              this.props.selectLetter();
+            }, 500);
           }
         }
-      })
-      .begin()
-      .showPredictionPoints(true);
+      }
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.started && nextProps.started) {
+      webgazer.showPredictionPoints(true).resume();
+    } else if (this.props.started && !nextProps.started) {
+      webgazer.showPredictionPoints(false).pause();
+    }
   }
 
   componentWillUnmount() {
@@ -73,11 +76,11 @@ class Trainer extends PureComponent {
           top: '6rem',
           right: '1rem',
           height: 'calc(100vh - 7rem)',
-          width: '60vw',
+          width: '45vw',
         }}
       />
     );
   }
 }
 
-export default Trainer;
+export default Target;
