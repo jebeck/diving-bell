@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './FreqOrderedAlphabet.css';
 
@@ -40,8 +41,8 @@ const FreqOrderedAlphabet = props => {
 };
 
 FreqOrderedAlphabet.propTypes = {
-  currentLetter: React.PropTypes.string,
-  letters: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  currentLetter: PropTypes.string,
+  letters: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default FreqOrderedAlphabet;
