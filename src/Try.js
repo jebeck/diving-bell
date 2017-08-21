@@ -13,6 +13,7 @@ import {
 import update from 'immutability-helper';
 
 import BreadcrumbsWrapper from './BreadcrumbsWrapper';
+import FreqOrderedAlphabet from './FreqOrderedAlphabet';
 import Target from './Target';
 
 /* eslint-disable no-undef */
@@ -58,6 +59,34 @@ class Try extends PureComponent {
         'Q',
         'J',
         'Z',
+      ],
+      fr: [
+        'E',
+        'S',
+        'A',
+        'R',
+        'I',
+        'N',
+        'T',
+        'U',
+        'L',
+        'O',
+        'M',
+        'D',
+        'P',
+        'C',
+        'F',
+        'B',
+        'V',
+        'H',
+        'G',
+        'J',
+        'Q',
+        'Z',
+        'Y',
+        'X',
+        'K',
+        'W',
       ],
     },
     locale: 'en',
@@ -171,6 +200,12 @@ class Try extends PureComponent {
         >
           <Grid.Column stretched verticalAlign="bottom">
             <Grid.Row>
+              <FreqOrderedAlphabet
+                currentLetter={this.state.currentLetter}
+                letters={this.props.freqOrderedLetters[this.props.locale]}
+              />
+            </Grid.Row>
+            <Grid.Row>
               <Segment
                 basic
                 style={{
@@ -181,7 +216,7 @@ class Try extends PureComponent {
                   width: '100%',
                 }}
               >
-                {this.state.currentLetter}
+                {this.state.currentLetter || '_'}
               </Segment>
             </Grid.Row>
             <Grid.Row>
