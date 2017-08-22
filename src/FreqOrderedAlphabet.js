@@ -27,6 +27,7 @@ const FreqOrderedAlphabet = props => {
             style={{
               fontSize: '3rem',
               fontWeight: 'bold',
+              lineHeight: 1.25,
               padding: '0.75rem',
               textAlign: 'center',
               width,
