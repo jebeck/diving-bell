@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Loader } from 'semantic-ui-react';
 
 import './Trainer.css';
 
@@ -62,8 +63,7 @@ class Trainer extends PureComponent {
     const selectedClass = this.state.selected ? 'selected' : 'unselected';
     return (
       <div
-        className={selectedClass}
-        id="#target"
+        id="target"
         ref={node => {
           this.select = node;
         }}
@@ -75,7 +75,13 @@ class Trainer extends PureComponent {
           height: 'calc(100vh - 7rem)',
           width: '60vw',
         }}
-      />
+      >
+        <div
+          className={selectedClass}
+          style={{ background: 'white', height: '100%', width: '100%' }}
+        />
+        <Loader active={this.state.selected} />
+      </div>
     );
   }
 }
