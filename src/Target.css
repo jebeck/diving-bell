@@ -1,9 +1,0 @@
-.unselected {
-  background-color: rgba(118, 118, 118, 0.25);
-  transition: background-color 150ms;
-}
-
-.selected {
-  background-color: #21ba45;
-  transition: background-color 2s;
-}

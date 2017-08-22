@@ -10115,6 +10115,10 @@ var mosseFilterResponses = function() {
     predictedY = Math.floor(predictedY);
 
     return {
+      blinked:
+        eyesObj.left &&
+        eyesObj.left.blink &&
+        (eyesObj.right && eyesObj.right.blink),
       x: predictedX,
       y: predictedY,
     };
@@ -10666,6 +10670,7 @@ var mosseFilterResponses = function() {
       return predictions[regModelIndex] === null
         ? null
         : {
+            blinked: predictions[regModelIndex].blinked,
             x: predictions[regModelIndex].x,
             y: predictions[regModelIndex].y,
           };

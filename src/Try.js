@@ -14,7 +14,7 @@ import update from 'immutability-helper';
 
 import BreadcrumbsWrapper from './BreadcrumbsWrapper';
 import FreqOrderedAlphabet from './FreqOrderedAlphabet';
-import Target from './Target';
+import LetterSelector from './LetterSelector';
 
 /* eslint-disable no-undef */
 
@@ -90,6 +90,7 @@ class Try extends PureComponent {
       ],
     },
     locale: 'en',
+    scanningPace: 2000,
   };
 
   handleClose = e => {
@@ -103,6 +104,16 @@ class Try extends PureComponent {
   handlePause = () => {
     clearInterval(this.scanner);
     this.setState(() => ({ started: false }));
+  };
+
+  handleReset = () => {
+    clearInterval(this.scanner);
+    this.setState(() => ({
+      currentIndex: 0,
+      currentLetter: null,
+      letters: [],
+      started: false,
+    }));
   };
 
   handleStart = () => {
@@ -125,7 +136,7 @@ class Try extends PureComponent {
               currentLetter: props.freqOrderedLetters[props.locale][newIndex],
             };
           });
-        }, 2000);
+        }, this.props.scanningPace);
       }
     );
   };
@@ -188,17 +199,59 @@ class Try extends PureComponent {
         </Modal>
         {this.state.modalOpen
           ? null
-          : <Target
+          : <LetterSelector
+              currentLetter={this.state.currentLetter}
               selectLetter={this.selectLetter}
               started={this.state.started}
             />}
         <Grid
-          columns={3}
+          columns={2}
+          divided
           textAlign="right"
-          stretched
           style={{ height: 'calc(100vh - 4rem)', width: '90vw' }}
         >
-          <Grid.Column stretched verticalAlign="bottom">
+          <Grid.Column verticalAlign="middle">
+            <Grid.Row>
+              <Segment basic style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <Form>
+                  <TextArea
+                    placeholder="Your selected letters will appear here"
+                    readOnly
+                    rows={16}
+                    value={this.state.letters.join('')}
+                  />
+                </Form>
+              </Segment>
+            </Grid.Row>
+            <Grid.Row>
+              <Button
+                color="orange"
+                disabled={!this.state.started}
+                floated="left"
+                icon="delete"
+                content="Reset"
+                labelPosition="left"
+                onClick={this.handleReset}
+              />
+              <Button
+                disabled={!this.state.started}
+                icon="pause"
+                content="Pause"
+                labelPosition="left"
+                onClick={this.handlePause}
+              />
+              <Button
+                disabled={this.state.started}
+                icon="play"
+                content="Start"
+                labelPosition="left"
+                onClick={this.handleStart}
+                primary
+              />
+            </Grid.Row>
+            <Grid.Row />
+          </Grid.Column>
+          <Grid.Column verticalAlign="middle">
             <Grid.Row>
               <FreqOrderedAlphabet
                 currentLetter={this.state.currentLetter}
@@ -218,35 +271,6 @@ class Try extends PureComponent {
               >
                 {this.state.currentLetter || '_'}
               </Segment>
-            </Grid.Row>
-            <Grid.Row>
-              <Segment basic style={{ paddingLeft: 0, paddingRight: 0 }}>
-                <Form>
-                  <TextArea
-                    autoHeight
-                    placeholder="Your selected letters will appear here"
-                    readOnly
-                    value={this.state.letters.join('')}
-                  />
-                </Form>
-              </Segment>
-            </Grid.Row>
-            <Grid.Row>
-              <Button
-                disabled={!this.state.started}
-                icon="pause"
-                content="Pause"
-                labelPosition="left"
-                onClick={this.handlePause}
-              />
-              <Button
-                disabled={this.state.started}
-                icon="play"
-                content="Start"
-                labelPosition="left"
-                onClick={this.handleStart}
-                primary
-              />
             </Grid.Row>
           </Grid.Column>
         </Grid>
