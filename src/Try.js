@@ -4,11 +4,9 @@ import {
   Button,
   Form,
   Grid,
-  Header,
-  Icon,
-  Modal,
   Segment,
   TextArea,
+  Transition,
 } from 'semantic-ui-react';
 import update from 'immutability-helper';
 
@@ -26,6 +24,7 @@ class Try extends PureComponent {
       currentIndex: 0,
       currentLetter: null,
       letters: [],
+      showingHelpText: false,
       started: false,
     };
   }
@@ -93,12 +92,8 @@ class Try extends PureComponent {
     scanningPace: 2000,
   };
 
-  handleClose = e => {
-    this.setState({ modalOpen: false });
-  };
-
-  handleOpen = e => {
-    this.setState({ modalOpen: true });
+  toggleHelpText = e => {
+    this.setState(state => ({ showingHelpText: !state.showingHelpText }));
   };
 
   handlePause = () => {
@@ -163,40 +158,28 @@ class Try extends PureComponent {
         }}
         currentLocation={_.get(this.props, ['location', 'pathname'], '/')}
       >
-        <Modal
-          trigger={
-            <Button
-              basic
-              color="red"
-              compact
-              icon="help"
-              onClick={this.handleOpen}
-              size="huge"
-            />
-          }
-          open={this.state.modalOpen}
-          onClose={this.handleClose}
-          basic
-          size="small"
+        <div
+          style={{
+            alignItems: 'baseline',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
         >
-          <Header icon="help" content="Help!" />
-          <Modal.Content>
-            <p>
-              To select a letter, look at the target area on the right when the
-              letter you want to select is active.
-            </p>
-            <p>
-              If lighting conditions and/or computer performance are poor,
-              making small circles and/or clicking with your cursor as you move
-              and then hold your gaze on the target area will help.
-            </p>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button color="green" inverted onClick={this.handleClose}>
-              <Icon name="checkmark" /> Got it, thanks
-            </Button>
-          </Modal.Actions>
-        </Modal>
+          <Transition visible={this.state.showingHelpText}>
+            <div>
+              To select a letter, blink twice while the letter you want to
+              select is active.&nbsp;&nbsp;&nbsp;
+            </div>
+          </Transition>
+          <Button
+            basic
+            color="red"
+            compact
+            icon={this.state.showingHelpText ? 'cancel' : 'help'}
+            onClick={this.toggleHelpText}
+            size="huge"
+          />
+        </div>
         {this.state.modalOpen
           ? null
           : <LetterSelector

@@ -88,15 +88,17 @@ class Train extends PureComponent {
               your gaze location.
             </p>
             <p>
-              To train WebGazer, you must hold your gaze on the active area at
-              the right side of the screen for at least one second, and you must
-              do this five times. Between each one-second gaze holding, you must
-              move your gaze away from the active area and then back again to
+              To train WebGazer, you must hold your gaze and cursor on the
+              active area at the right side of the screen for at least one
+              second, and you must do this five times. Between each one-second
+              gaze holding, you must move your gaze and cursor to the left side
+              of the screen away from the active area and then back again to
               continue the training.
             </p>
             <p>
-              The active area starts gray and turns green as you get closer to
-              the one-second threshold.
+              The active area starts blank and fades into a target-shaped
+              gradient the longer your gaze remains on it. The spinner in the
+              center of the target is there to help you focus your gaze.
             </p>
             <p>
               If lighting conditions and/or computer performance are poor,

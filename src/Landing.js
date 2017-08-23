@@ -41,7 +41,7 @@ class Landing extends PureComponent {
           }}
         >
           <Header as="h1" size="huge">
-            The Diving Bell
+            Escape the Diving Bell!
           </Header>
           <Header as="h3">
             partner-less{' '}
@@ -85,7 +85,7 @@ class Landing extends PureComponent {
                   </a>{' '}
                   is an alternative communication technique that enables a
                   person with severe speech impairments—most notably,
-                  "locked-in" syndrome— to communicate.
+                  "locked-in" syndrome—to communicate.
                 </p>
                 <p>
                   Traditionally, partner-assisted scanning consists in the
@@ -96,7 +96,7 @@ class Landing extends PureComponent {
                 </p>
                 <p>
                   This proof-of-concept web application replaces the "partner"
-                  in partner-assisted scanning with webcam-based gaze detection
+                  in partner-assisted scanning with webcam-based blink detection
                   via the open-source library{' '}
                   <a
                     href="https://webgazer.cs.brown.edu/"

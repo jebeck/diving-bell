@@ -50,9 +50,9 @@ class Intro extends PureComponent {
           <Header icon="unlock" content="Permissions!" size="large" />
           <Segment size="large">
             <p>
-              In order to try out this prototype, you <strong>must</strong>{' '}
-              allow webcam access in the browser pop-up requesting this on the
-              next page!
+              In order to try out this proof-of-concept, you{' '}
+              <strong>must</strong> allow webcam access in the browser pop-up on
+              the next page!
             </p>
           </Segment>
           <Container
@@ -73,17 +73,15 @@ class Intro extends PureComponent {
               <Modal.Content>
                 <p>
                   To replace the "partner" in traditional partner-assisted
-                  scanning, this prototype replaces the partner's reading
-                  through the frequency-ordered list of letters of the alphabet
+                  scanning, this proof-of-concept replaces the partner's reading
+                  through a frequency-ordered list of letters of the alphabet
                   with an application interface that animates through the
                   frequency-ordered letters on a timer. To replace the partner's
                   awareness of the user's letter selection via blinking, this
-                  prototype employs gaze detection in a target area of the
-                  screen: a held gaze in the target area meeting or exceeding a
-                  duration threshold counts as selection of the current letter.
+                  proof-of-concept counts two blinks while the same letter is
+                  active as selection of that letter.
                 </p>
                 <p>
-                  This prototype employs the{' '}
                   <a
                     href="https://webgazer.cs.brown.edu/"
                     rel="noopener noreferrer"
@@ -92,21 +90,20 @@ class Intro extends PureComponent {
                   >
                     WebGazer.js
                   </a>{' '}
-                  library for eye-tracking on the web. WebGazer tracks a user's
-                  eye movements using the video stream provided by the user's
-                  webcam in combination with algorithmic processing of that
-                  image. Gaze target rather than blink action is used because
-                  WebGazer has not yet fully integrated blink detection into the
-                  library's functionality.
+                  powers the blink detection in this application. WebGazer is an
+                  eye-tracking library for the web; it tracks a user's eye
+                  movements using the video stream provided by the user's webcam
+                  in combination with algorithmic processing of that image.
                 </p>
                 <p>
                   Because WebGazer relies on a webcam video stream, allowing
-                  webcam permissions is necessary to try out this prototype:{' '}
+                  webcam permissions is necessary to try out this
+                  proof-of-concept:{' '}
                   <strong>
                     you <em>must</em> click 'Allow' on the next screen when the
                     browser alert asking for webcam access pops up
-                  </strong>. Note that all image processing is done in the local
-                  web browser; there is no connection to a server and no
+                  </strong>. Note that all image processing is done in the
+                  browser client; there is no connection to a server and no
                   transmission or storage of the webcam video stream or
                   component static images.
                 </p>
