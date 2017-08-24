@@ -8,6 +8,9 @@ import {
   Segment,
 } from 'semantic-ui-react';
 
+import divingbell from './diving-bell.jpg';
+import './Landing.css';
+
 class Landing extends PureComponent {
   constructor(props) {
     super(props);
@@ -29,7 +32,15 @@ class Landing extends PureComponent {
 
   render() {
     return (
-      <Container>
+      <Container
+        style={{
+          backgroundImage: `url(${divingbell})`,
+          backgroundPosition: 'center bottom',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          width: '100vw',
+        }}
+      >
         <Container
           style={{
             height: '80vh',
@@ -40,12 +51,13 @@ class Landing extends PureComponent {
             alignItems: 'center',
           }}
         >
-          <Header as="h1" size="huge">
-            Escape the Diving Bell!
+          <Header as="h1" inverted size="huge">
+            escape the diving bell
           </Header>
-          <Header as="h3">
+          <Header as="h3" inverted>
             partner-less{' '}
             <a
+              className="inverted-link"
               href="https://en.wikipedia.org/wiki/Partner-assisted_scanning"
               rel="noopener noreferrer"
               target="_blank"
@@ -127,7 +139,7 @@ class Landing extends PureComponent {
             justifyContent: 'flex-end',
           }}
         >
-          <Segment basic>
+          <Segment basic inverted>
             Inspired by Jean-Dominique Bauby's memoir{' '}
             <em>The Diving Bell and the Butterfly</em>
           </Segment>

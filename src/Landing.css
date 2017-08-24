@@ -1,0 +1,8 @@
+.inverted-link {
+  color: #fff8dc;
+}
+
+.inverted-link:hover,
+.inverted-link:focus {
+  color: #fbbd08;
+}
