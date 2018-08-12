@@ -14,20 +14,22 @@ class LetterSelector extends PureComponent {
   }
 
   componentDidMount() {
-    const { doubleBlinkThreshold } = this.props;
+    const { currentLetter, doubleBlinkThreshold, selectLetter } = this.props;
 
     let blinkCount = 0;
     webgazer.setGazeListener((data, elapsed) => {
       if (data != null) {
         const blinked = _.get(data, ['all', 0, 'blinked'], false);
         if (blinked) {
+          console.log('Blinked!');
           if (!this.state.blinked) {
             this.setState(() => ({
               blinked: true,
-              firstBlinkLetter: this.props.currentLetter,
+              firstBlinkLetter: currentLetter,
               firstBlinkTime: elapsed,
             }));
             setTimeout(() => {
+              console.log('Passed threshold! Reset!');
               this.setState(() => ({
                 blinked: false,
                 firstBlinkLetter: null,
@@ -38,19 +40,24 @@ class LetterSelector extends PureComponent {
           }
         } else {
           if (this.state.blinked) {
+            console.log('Already blinked');
             blinkCount += 1;
             if (
               blinkCount >= 2 &&
               elapsed - this.state.firstBlinkTime < doubleBlinkThreshold &&
-              this.state.firstBlinkLetter === this.props.currentLetter
+              this.state.firstBlinkLetter === currentLetter
             ) {
-              this.props.selectLetter();
+              console.log('Select letter!');
+              selectLetter();
               blinkCount = 0;
+              return this.setState({
+                blinked: false,
+                firstBlinkLetter: null,
+                firstBlinkTime: null,
+              });
             }
             this.setState(() => ({
               blinked: false,
-              firstBlinkLetter: null,
-              firstBlinkTime: null,
             }));
           }
         }
